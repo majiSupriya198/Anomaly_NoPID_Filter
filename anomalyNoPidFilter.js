@@ -26,14 +26,13 @@ async function filterRetailers(firstFilePath, secondFilePath, outputFilePath) {
   try {
     const firstFileData = await readCSV(firstFilePath);
     const secondFileData = await readCSV(secondFilePath);
-
-    const retailersToRemove = firstFileData.map((item) => item.retailer );
-
+    const pageTypesToRemove = firstFileData.map((item) => item.page_type);
+    const retailersToRemove = firstFileData.map((item) => item.retailer);
     const filteredData = secondFileData.map((item) => {
-      if (retailersToRemove.includes(item.retailer)) {
-        return { ...item,Verifier: "", status: 'Not Feasible', "Ticket No" :""  };
+      if (retailersToRemove.includes(item.retailer) && pageTypesToRemove.includes(item.page_type)) {
+      return { ...item, Verifier: "", status: 'Not Feasible', "Ticket No": "" };
       } else {
-        return item;
+      return item;
       }
     });
 
