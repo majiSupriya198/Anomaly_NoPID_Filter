@@ -29,7 +29,7 @@ async function filterRetailers(firstFilePath, secondFilePath, outputFilePath) {
     const pageTypesToRemove = firstFileData.map((item) => item.page_type);
     const retailersToRemove = firstFileData.map((item) => item.retailer);
     const filteredData = secondFileData.map((item) => {
-      if (retailersToRemove.includes(item.retailer) && pageTypesToRemove.includes(item.page_type)) {
+      if (retailersToRemove.includes(item.retailer) && pageTypesToRemove.includes(item.page_type) && item.attribute === 'extract.productNo') {
         return { ...item, Verifier: '', status: 'Not Feasible', "Ticket No": '' };
       } else {
         if(item.retailer != null && item.retailer_type.toUpperCase() === 'APP'){
